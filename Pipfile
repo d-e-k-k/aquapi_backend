@@ -13,6 +13,7 @@ gunicorn = "*"
 djoser = "*"
 django-cors-headers = "*"
 whitenoise = "*"
+djangorestframework = "*"
 
 [requires]
 python_version = "3.8"
