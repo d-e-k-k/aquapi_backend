@@ -6,4 +6,4 @@ from .serializers import TemperatureSerializer
 
 class Temperature_list(generics.ListCreateAPIView):
     queryset = Temperature.objects.all()
-    serializers_class = TemperatureSerializer
+    serializer_class = TemperatureSerializer

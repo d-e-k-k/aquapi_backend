@@ -2,7 +2,7 @@
 from rest_framework import serializers
 from .models import Temperature
 
-class TemperatureSerializer(serializers.ModelField):
+class TemperatureSerializer(serializers.ModelSerializer):
     class Meta:
-        model: Temperature
+        model = Temperature
         fields = ('id', 'temperature', 'date', 'time')
