@@ -14,3 +14,5 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'aquapi.settings')
 
 application = get_wsgi_application()
+
+web: gunicorn aquapi.wsgi
