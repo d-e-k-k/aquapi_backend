@@ -57,9 +57,13 @@ def temperature_detail(request, pk):
 @api_view(['GET'])
 def temperature_list_date_range(request):
     if request.method == 'GET':
+        starting_date = request.data["start"]
+        ending_date = request.data["end"]
+
         temperatures = Temperature.objects.filter(
-            date__range=["12-12-2020", "13-12-2020"])
+            date__range=[starting_date, ending_date])
         serializer = TemperatureSerializer(temperatures, many=True)
+        print(starting_date, ending_date)
         return Response(serializer.data)
 
 # from rest_framework import generics
