@@ -41,37 +41,12 @@ def temperature_detail(request, pk):
     return Response("Unauthorized Request", status=status.HTTP_401_UNAUTHORIZED)
 
 
-
-# @api_view(['DELETE'])
-# @permission_classes([IsAdminUser])
-# def temperature_detail(request, pk):
-#     try:
-#         temperature = Temperature.objects.get(pk=pk)
-#     except Temperature.DoesNotExist:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
-#     if request.method == 'DELETE':
-#        temperature.delete()
-#        return Response(status=status.HTTP_204_NO_CONTENT)
-
-
 @api_view(['GET'])
 def temperature_list_date_range(request):
     if request.method == 'GET':
-        starting_date = request.data["start"]
-        ending_date = request.data["end"]
-
+        start = request.GET.get('start')
+        end = request.GET.get('end')
         temperatures = Temperature.objects.filter(
-            date__range=[starting_date, ending_date])
+            date__range=[start, end])
         serializer = TemperatureSerializer(temperatures, many=True)
-        print(starting_date, ending_date)
         return Response(serializer.data)
-
-# from rest_framework import generics
-# from rest_framework import serializers
-# from rest_framework.permissions import IsAdminUser
-# from .models import Temperature
-# from .serializers import TemperatureSerializer
-
-# # class Temperature_list(generics.ListCreateAPIView):
-# #     queryset = Temperature.objects.all()
-# #     serializer_class = TemperatureSerializer
