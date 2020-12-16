@@ -21,15 +21,22 @@ def water_change_details(request):
     return Response(serializer.erros, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['PATCH'])
+@api_view(['PATCH', 'DELETE', 'GET'])
 def update_status(request, pk):
+    # print((details.__dict__))
     try:
-        details = WaterChange.objects.filter(pk=pk)
-    except WaterChange.DoesNotExist:
+        details = WaterChange.objects.get(pk=pk)
+        if request.method == 'GET':
+            serializer = WaterChangeSerializer(details)
+            return Response(serializer.data)
+        # elif request.method == 'PATCH':
+        #     serializer = WaterChangeSerializer(details, data=request.data, partial=True)
+        #     if serializer.is_valid():
+        #         serializer.save()
+        #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+        elif request.method == 'DELETE':
+            details.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+    except :
         return Response(status=status.HTTP_404_NOT_FOUND)
-    if request.method == 'PATCH':
-        serializer = WaterChangeSerializer( data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.erros, status=status.HTTP_400_BAD_REQUEST)
