@@ -7,3 +7,15 @@ from .serializer import WaterChangeSerializer
 
 # Create your views here.
 
+@api_view(['GET', 'POST'])
+def water_change_details(request):
+    if request.method == 'GET':
+        details = WaterChange.objects.all()
+        serializer = WaterChangeSerializer(details, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = WaterChangeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.erros, status=status.HTTP_400_BAD_REQUEST)
