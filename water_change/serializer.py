@@ -4,4 +4,4 @@ from .models import WaterChange
 class WaterChangeSerializer(serializers.ModelSerializer):
     class Meta:
         model = WaterChange
-        fields = ('water_change_date', 'water_change_interval')
+        fields = ('water_change_date', 'water_change_interval', 'time_stamp')
