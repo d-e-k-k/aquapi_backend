@@ -23,17 +23,16 @@ def water_change_details(request):
 
 @api_view(['PATCH', 'DELETE', 'GET'])
 def update_status(request, pk):
-    # print((details.__dict__))
     try:
         details = WaterChange.objects.get(pk=pk)
         if request.method == 'GET':
             serializer = WaterChangeSerializer(details)
             return Response(serializer.data)
-        # elif request.method == 'PATCH':
-        #     serializer = WaterChangeSerializer(details, data=request.data, partial=True)
-        #     if serializer.is_valid():
-        #         serializer.save()
-        #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+        elif request.method == 'PATCH':
+            serializer = WaterChangeSerializer(details, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
         elif request.method == 'DELETE':
             details.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
