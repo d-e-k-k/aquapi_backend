@@ -50,8 +50,6 @@ Althought it is obvious now, filter returns a query set while get returns a sing
 
 ## Some Wanted/Needed Additions 
 - Allow for multiple aquariums to be monitored 
-- Better formatting for the temperature graph axis 
-- Calendar Widget for date range selector
 - Refactoring date format to follow MM/DD/YYYY instead of DD-MM-YYY
 - And much more!
 
