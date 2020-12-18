@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'users',
     'temperature',
+    'water_change',
 ]
 
 MIDDLEWARE = [
