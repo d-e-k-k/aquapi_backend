@@ -8,6 +8,7 @@ AquaPi is an automated aquarium controller that can monitor and manage a variety
 ## Original Wireframe
 ![](planning/images/wire_frame.png) 
 
+
 ## Instillation Steps
 1. Fork and clone this repo
 2. Cd into the project directory
