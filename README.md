@@ -8,11 +8,30 @@ AquaPi is an automated aquarium controller that can monitor and manage a variety
 ## Original Wireframe
 ![](planning/images/wire_frame.png) 
 
+## User stories
+
+- As a hobbyist aquarium owner, I would like to be able to remotely check the status of my aquarium.
+- As a user, I would like to be able to see this info on a web page or cellular application so I can be confident my aquarium is okay even when I’m not home.
+- As a user, I would like to  know what the current or recent water temperature is so I can monitor if their might be an issue or failure.
+- As a user, I would like to be able to see historical temperature data so I can see if my heater is wearing out or how stable my tank temperature is.
+
+## Stretch
+
+- As a user I would like to see historical temperature for different time intervals: day, week, month
+- As a user I would like to see historical temperature displayed in a graph so I can quickly visualize the info and recognize trend and outliers
+- As a user, I would like to have an automatic aquarium feeder so my fish can be feed when I am not home
+- As a user I would like to know if my automatic feeding feature is activated and turn it on and off so it only feeds the fish when I’m not home .
+- As a user, I would like to be able to monitor water flow so I can make sure the pumps are running and could use this as indicator for leaks or pumps needing to be cleaned.
+
 
 ## Instillation Steps
 1. Fork and clone this repo
 2. Cd into the project directory
 3. Install project dependencies by running npm i 
+  - moment
+  - axios
+  - recharts
+  
 4. Create a new feature branch and start working!
 
 ## Technologies
@@ -24,6 +43,10 @@ AquaPi is an automated aquarium controller that can monitor and manage a variety
 ## Deployment Link
 - Frontend: https://aquapi.herokuapp.com/
 - Backend: https://mighty-lake-45709.herokuapp.com/
+
+## Stuff That Got Me Stuck
+- Django ORM return from "filter" vs "get"
+Althought it is obvious now, filter returns a query set while get returns a singular item. I attempted to access an object but what I had was a queryset. Solution: grab the index or switch the method to git.
 
 ## Some Wanted/Needed Additions 
 - Allow for multiple aquariums to be monitored 
