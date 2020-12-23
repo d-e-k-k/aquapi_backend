@@ -49,6 +49,10 @@ AquaPi is an automated aquarium controller that can monitor and manage a variety
 - Django ORM return from "filter" vs "get"
 Althought it is obvious now, filter returns a query set while get returns a singular item. I attempted to access an object but what I had was a queryset. Solution: grab the index or switch the method to git.
 
+## Current Challanges
+
+
+
 ## Some Wanted/Needed Additions 
 - Allow for multiple aquariums to be monitored 
 - Refactoring date format to follow MM/DD/YYYY instead of DD-MM-YYY
