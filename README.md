@@ -1,9 +1,12 @@
 # AquaPi Backend
 
 ## Description
-AquaPi is an automated aquarium controller that can monitor and manage a variety of aquarium components. Built with a RaspberryPi single board computer and some sensors, the AquaPi framework is extremely customizable and affordable. Excited….? Checkout the frontend repo and deployde fontend as well as the controller repo here! 
+AquaPi is an automated aquarium controller that can monitor and manage a variety of aquarium components. Built with a RaspberryPi single board computer and some sensors, the AquaPi framework is extremely customizable and affordable. The frontend was built with React while the backend is handled by Django with a Postgresql DB. Excited….? Checkout deployed application and all the related github repos below.
 
+- Deployed frontend https://aquapi.herokuapp.com/
+- Deployed backend https://mighty-lake-45709.herokuapp.com/
 - https://github.com/d-e-k-k/aquapi_frontend 
+- https://github.com/d-e-k-k/aquapi_backend
 - https://github.com/d-e-k-k/aquapi_aquarium_controller
 
 ## Original Wireframe
@@ -41,9 +44,6 @@ AquaPi is an automated aquarium controller that can monitor and manage a variety
 - Django REST Framework
 - Postgresql
 
-## Deployment Link
-- Frontend: https://aquapi.herokuapp.com/
-- Backend: https://mighty-lake-45709.herokuapp.com/
 
 ## Stuff That Got Me Stuck
 - Django ORM return from "filter" vs "get"
