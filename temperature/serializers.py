@@ -6,3 +6,9 @@ class TemperatureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Temperature
         fields = ('id', 'temperature', 'date', 'time')
+
+
+class AvgTemperatureSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Temperature
+        fields = ('id', 'temperature')
