@@ -90,7 +90,7 @@ def temperature_list_date_range_interval(request):
             avg_temp = temps.aggregate(Avg('temperature'))
             if avg_temp["temperature__avg"]:
                 daily_temps.append(
-                    {"date": xdate, "avg_temp": '{0:.2f}'.format(avg_temp["temperature__avg"])})
+                    {"Date": xdate, "Avg Daily Temperature (F)": '{0:.2f}'.format(avg_temp["temperature__avg"])})
         print(daily_temps)
         return Response(daily_temps)
 
