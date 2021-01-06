@@ -51,26 +51,7 @@ def temperature_list_date_range(request):
         serializer = TemperatureSerializer(temperatures, many=True)
         return Response(serializer.data)
 
-# Gets average of all existing temps
-# @api_view(['GET'])
-# def temperature_list_date_range_interval(request):
-#     if request.method == 'GET':
-#         temp_avg = Temperature.objects.aggregate(Avg('temperature'))
-#         print(temp_avg)
-#         return Response(temp_avg)
 
-# gets average from queryset
-# @api_view(['GET'])
-# def temperature_list_date_range_interval(request):
-#     if request.method == 'GET':
-#         start = request.GET.get('start')
-#         end = request.GET.get('end')
-#         temps_qs = Temperature.objects.filter(date__range = [start, end])
-#         avg_temp = temps_qs.aggregate(Avg('temperature'))
-#         print(avg_temp)
-#         return Response(avg_temp)
-
-# gets average for each day in a range days
 
 
 @api_view(['GET'])
@@ -93,8 +74,3 @@ def temperature_list_date_range_interval(request):
                     {"Date": xdate, "Avg Daily Temperature (F)": '{0:.2f}'.format(avg_temp["temperature__avg"])})
         print(daily_temps)
         return Response(daily_temps)
-
-
-# Grab each individaul date
-# Do a filter query for each individual date
-# de
