@@ -3,8 +3,9 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from .models import Temperature
-from .serializers import TemperatureSerializer
-from datetime import datetime
+from .serializers import TemperatureSerializer, AvgTemperatureSerializer
+from datetime import datetime, date
+from django.db.models import Avg
 
 
 @api_view(['GET', 'POST'])
@@ -23,7 +24,6 @@ def temperature_list(request):
         elif not request.user.is_superuser:
             return Response("Unauthorized Request", status=status.HTTP_401_UNAUTHORIZED)
     return Response(serializer.erros, status=status.HTTP_400_BAD_REQUEST)
-   
 
 
 @api_view(['GET', 'DELETE'])
@@ -36,8 +36,8 @@ def temperature_detail(request, pk):
         serializer = TemperatureSerializer(temperature)
         return Response(serializer.data)
     elif request.method == 'DELETE' and request.user.is_superuser:
-            temperature.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
+        temperature.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
     return Response("Unauthorized Request", status=status.HTTP_401_UNAUTHORIZED)
 
 
@@ -50,3 +50,25 @@ def temperature_list_date_range(request):
             date__range=[start, end])
         serializer = TemperatureSerializer(temperatures, many=True)
         return Response(serializer.data)
+
+
+@api_view(['GET'])
+def temperature_list_date_range_interval(request):
+    if request.method == 'GET':
+        start = request.GET.get('start').split("-")
+        end = request.GET.get('end').split("-")
+        startDateObj = date(int(start[0]), int(start[1]), int(start[2]))
+        endDateObj = date(int(end[0]), int(end[1]), int(end[2]))
+        dif_days = (endDateObj - startDateObj).days
+        daily_temps = []
+        for x in range(0, dif_days):
+            dd = str(int(start[2]) + x)
+            if(len(dd) == 1):
+                dd= f"0{dd}"
+            xdate = (f"{start[0]}-{start[1]}-{dd}")
+            temps = Temperature.objects.filter(date=xdate)
+            avg_temp = temps.aggregate(Avg('temperature'))
+            if avg_temp["temperature__avg"]:
+                daily_temps.append(
+                    {"Date": xdate, "Avg Daily Temperature (F)": '{0:.2f}'.format(avg_temp["temperature__avg"])})
+        return Response(daily_temps)
