@@ -60,14 +60,15 @@ def temperature_list_date_range_interval(request):
         startDateObj = date(int(start[0]), int(start[1]), int(start[2]))
         endDateObj = date(int(end[0]), int(end[1]), int(end[2]))
         dif_days = (endDateObj - startDateObj).days
-        print(dif_days)
         daily_temps = []
         for x in range(0, dif_days):
-            xdate = (f"{start[0]}-{start[1]}-{str(int(start[2]) + x)}")
+            dd = str(int(start[2]) + x)
+            if(len(dd) == 1):
+                dd= f"0{dd}"
+            xdate = (f"{start[0]}-{start[1]}-{dd}")
             temps = Temperature.objects.filter(date=xdate)
             avg_temp = temps.aggregate(Avg('temperature'))
             if avg_temp["temperature__avg"]:
                 daily_temps.append(
                     {"Date": xdate, "Avg Daily Temperature (F)": '{0:.2f}'.format(avg_temp["temperature__avg"])})
-        print(daily_temps)
         return Response(daily_temps)
