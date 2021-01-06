@@ -57,16 +57,18 @@ def temperature_list_date_range(request):
 @api_view(['GET'])
 def temperature_list_date_range_interval(request):
     if request.method == 'GET':
-        start = request.GET.get('start')
-        end = request.GET.get('end')
-        start_list = start.split("-")
-        startDateObj = date(int(start_list[2]), int(start_list[1]), int(start_list[0]))
-        end_list = end.split("-")
-        endDateObj = date(int(end_list[2]), int(end_list[1]), int(end_list[0]))
+        start = request.GET.get('start').split("-")
+        end = request.GET.get('end').split("-")
+       
+        # start_list = start.split("-")
+        startDateObj = date(int(start[0]), int(start[1]), int(start[2]))
+        # end_list = end.split("-")
+        endDateObj = date(int(end[0]), int(end[1]), int(end[2]))
         dif_days = (endDateObj - startDateObj).days
+        print(dif_days)
         daily_temps=[]
         for x in range(0, dif_days):
-            xdate =(f"{str(int(start_list[0]) + x)}-12-2020")
+            xdate =(f"{start[0]}-{start[1]}-{str(int(start[2]) + x)}")
             temps = Temperature.objects.filter(date=xdate)
             avg_temp = temps.aggregate(Avg('temperature'))
             if avg_temp["temperature__avg"]:
