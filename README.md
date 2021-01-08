@@ -46,8 +46,15 @@ AquaPi is an automated aquarium controller that can monitor and manage a variety
 
 
 ## Stuff That Got Me Stuck
-- Django ORM return from "filter" vs "get"
+
 Althought it is obvious now, filter returns a query set while get returns a singular item. I attempted to access an object but what I had was a queryset. Solution: grab the index or switch the method to git.
+
+
+<details>
+<summary>Django ORM return from "filter" vs "get"</summary>
+<br>
+Althought it is obvious now, filter returns a query set while get returns a singular item. I attempted to access an object but what I had was a queryset. Solution: grab the index or switch the method to git.
+</details>
 
 ## Current Challanges
 
