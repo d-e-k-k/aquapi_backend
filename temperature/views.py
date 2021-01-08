@@ -61,7 +61,7 @@ def temperature_list_date_range_interval(request):
         endDateObj = date(int(end[0]), int(end[1]), int(end[2]))
         dif_days = (endDateObj - startDateObj).days
         daily_temps = []
-        for x in range(0, dif_days):
+        for x in range(0, dif_days + 1 ):
             dd = str(int(start[2]) + x)
             if(len(dd) == 1):
                 dd= f"0{dd}"
