@@ -47,22 +47,27 @@ AquaPi is an automated aquarium controller that can monitor and manage a variety
 
 ## Stuff That Got Me Stuck
 
-Althought it is obvious now, filter returns a query set while get returns a singular item. I attempted to access an object but what I had was a queryset. Solution: grab the index or switch the method to git.
-
 
 <details>
-<summary>Django ORM return from "filter" vs "get"</summary>
+<summary>Django Query return from "filter" vs "get"</summary>
 <br>
 Althought it is obvious now, filter returns a query set while get returns a singular item. I attempted to access an object but what I had was a queryset. Solution: grab the index or switch the method to git.
 </details>
 
-## Current Challanges
+
+<details>
+<summary>Django Query: DD-MM-YYYY or YYYY-MM-DD ?</summary>
+<br>
+I had an issue where I could not query date ranges across multiple months or years. I was using
+```Temperature.objects.filter(date__range=[start, end])```
+to return all temperatures in a specified range. The problem was the date string. When in the DD-MM-YYYY format, the DD was being considered before the month and year. This led to dates like 01-01-2021 or 05-12-2020 being considered earlier than 15-11-2020. This bug led to incorrect, incomplete, or no data being returned. By flipping the date string around to YYYY-MM-DD the date__range method was able to correctly filter the database. 
+</details>
+
 
 
 
 ## Some Wanted/Needed Additions 
 - Allow for multiple aquariums to be monitored 
-- Refactoring date format to follow MM/DD/YYYY instead of DD-MM-YYY
 - And much more!
 
 ## How to Contribute 
